@@ -7,7 +7,7 @@ from sklearn.preprocessing import RobustScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve, roc_auc_score, accuracy_score, recall_score, f1_score
 import joblib
-
+import json
 # -----------------------------
 # 1️⃣ Load dataset
 # -----------------------------
@@ -81,4 +81,8 @@ plt.show()
 # -----------------------------
 joblib.dump(best_model, "fraud_detector_model.pkl")
 joblib.dump(scaler, "scaler.pkl")
-print("Model and scaler saved!")
+feature_names = X.columns.tolist()
+with open("feature_names.json", "w") as f:
+    json.dump(feature_names, f)
+
+print("Model, scaler, and feature names saved!")
